@@ -62,7 +62,7 @@ const Login = () => {
               required
             />
           </Box>
-
+          label
           {/* Password Input */}
           <Box mt={6} className="relative">
             <label
@@ -86,7 +86,6 @@ const Login = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </Box>
-
           {/* forgot pass */}
           <Box flex justifyContent="space-between" mt={4}>
             <Box flex className="gap-2">
@@ -95,7 +94,6 @@ const Login = () => {
             </Box>
             <p className="text-base font-medium">Forgot password?</p>
           </Box>
-
           <div className="flex flex-col items-center justify-center mt-12 ">
             <button
               className="bg-[#b91732] text-lg font-bold w-full py-4 text-white rounded-full 
@@ -104,14 +102,12 @@ const Login = () => {
               Sign In
             </button>
           </div>
-
           <div className="flex justify-center gap-3 mt-3">
             <p>Don't have account?</p>
             <button type="submit" className="font-bold">
               Sign up
             </button>
           </div>
-
           {error && (
             <p className="text-red-500 text-center font-bold text-lg  mt-2">
               {error}
