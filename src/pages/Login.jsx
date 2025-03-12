@@ -11,21 +11,24 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("ok");
+
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email,
         password,
       });
       if (res.data.success) {
-        console.log("Successfully login");
+        console.log("Login successful:");
+        // console.log("Token:", res.data.token);
+        // console.log("User info:", res.data.user);
       }
     } catch (error) {
-      if (error.res && error.res.data.success) {
-        setError(error.res.data.error);
+      if (error.response && error.response.data) {
+        setError(error.response.data.error);
       } else {
         setError("Server error");
       }
+      console.log("Có lỗi khi submit tới /api/auth/login", error);
     }
   };
 
@@ -56,6 +59,7 @@ const Login = () => {
               placeholder="example@gmail.com"
               className="mt-2 pb-1 w-full border-b border-gray-300 text-gray-500 focus:outline-none"
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </Box>
 
@@ -72,6 +76,7 @@ const Login = () => {
               placeholder="••••••••"
               className="mt-2 pb-1 w-full border-b border-gray-300 text-gray-500 focus:outline-none"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <button
               type="button"
@@ -92,7 +97,6 @@ const Login = () => {
           </Box>
 
           <div className="flex flex-col items-center justify-center mt-12 ">
-            {error && <p className="text-red-500">{error}</p>}
             <button
               className="bg-[#b91732] text-lg font-bold w-full py-4 text-white rounded-full 
             shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]"
@@ -107,6 +111,12 @@ const Login = () => {
               Sign up
             </button>
           </div>
+
+          {error && (
+            <p className="text-red-500 text-center font-bold text-lg  mt-2">
+              {error}
+            </p>
+          )}
         </form>
       </div>
     </Page>
